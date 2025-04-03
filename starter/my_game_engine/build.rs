@@ -6,5 +6,4 @@ fn main() {
     cc::Build::new()
         .file(format!("{}/opengl_wrapper.c", c_lib_path))
         .compile("opengl_wrapper");
-   
 }

@@ -24,7 +24,7 @@ macro_rules! start_window_and_game_loop {
     ($width:expr, $height:expr) => {{
         create_window($width, $height);
         while !window_should_close() {
-            tick!(16); 
+            tick!(16);
         }
     }};
 }
