@@ -1,6 +1,6 @@
 fn main() {
     // Specify the path to the C library
-    let c_lib_path = "opengl_wrapper_lib";
+    let c_lib_path = "../opengl_wrapper_lib";
 
     // Compile the C library
     cc::Build::new()
