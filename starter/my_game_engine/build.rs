@@ -6,6 +6,7 @@ fn main() {
         .compile("opengl_wrapper");
 
     // Link against necessary shared libraries
+    println!("cargo:rustc-link-lib=static=opengl_wrapper");
     println!("cargo:rustc-link-lib=dylib=glfw");
     println!("cargo:rustc-link-lib=dylib=GL");
     println!("cargo:rustc-link-search=native=c_output");
