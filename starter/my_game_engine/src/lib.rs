@@ -6,13 +6,13 @@ mod tests {
 
     #[test]
     fn test_create_window() {
-        let window = rust_create_window(800, 600);
+        let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
     }
 
     #[test]
     fn test_get_key() {
-        let window = rust_create_window(800, 600);
+        let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
 
         let key_state = rust_get_key(window, GLFW_KEY_SPACE);
@@ -24,7 +24,7 @@ mod tests {
 
     #[test]
     fn test_create_sprite() {
-        let window = rust_create_window(800, 600);
+        let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
 
         let sprite = rust_create_sprite(100, 100, 50, 50);
@@ -35,7 +35,7 @@ mod tests {
 
     #[test]
     fn test_window_should_close() {
-        let window = rust_create_window(800, 600);
+        let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
 
         let should_close = rust_window_should_close();
@@ -44,7 +44,7 @@ mod tests {
 
     #[test]
     fn test_update_game_window() {
-        let window = rust_create_window(800, 600);
+        let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
 
         rust_update_game_window();
@@ -52,7 +52,7 @@ mod tests {
 
     #[test]
     fn test_clear_screen() {
-        let window = rust_create_window(800, 600);
+        let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
 
         rust_clear_screen();
@@ -60,7 +60,7 @@ mod tests {
 
     #[test]
     fn test_update_sprite_position() {
-        let window = rust_create_window(800, 600);
+        let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
 
         let sprite = rust_create_sprite(100, 100, 50, 50);

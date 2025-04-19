@@ -1,8 +1,13 @@
-use std::os::raw::c_int;
+use std::ffi::CString;
+use std::os::raw::{c_char, c_int};
 
 extern "C" {
     fn get_key(window: *mut std::ffi::c_void, key: c_int) -> c_int;
-    fn create_game_window(width: i32, height: i32) -> *mut std::ffi::c_void;
+    fn create_game_window(
+        title: *const c_char,
+        width: c_int,
+        height: c_int,
+    ) -> *mut std::ffi::c_void;
     fn create_sprite(x: i32, y: i32, width: i32, height: i32) -> *mut std::ffi::c_void;
     fn window_should_close() -> bool;
     fn update_game_window();
@@ -22,8 +27,9 @@ pub fn rust_get_key(window: *mut std::ffi::c_void, key: c_int) -> bool {
     unsafe { get_key(window, key) == GLFW_PRESS }
 }
 
-pub fn rust_create_window(width: i32, height: i32) -> *mut std::ffi::c_void {
-    unsafe { create_game_window(width, height) }
+pub fn rust_create_window(title: &str, width: i32, height: i32) -> *mut std::ffi::c_void {
+    let c_title = CString::new(title).expect("Failed to convert title to CString");
+    unsafe { create_game_window(c_title.as_ptr(), width, height) }
 }
 
 pub fn rust_create_sprite(x: i32, y: i32, width: i32, height: i32) -> *mut std::ffi::c_void {
