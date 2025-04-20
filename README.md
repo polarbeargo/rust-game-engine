@@ -55,6 +55,13 @@ With this done, we are ready to start creating our game engine project. Inside t
 
 > Note: If you choose another name for your engine, you must update the references to `my_game_engine` in the `starter` folder's `Makefile` to reflect the new name.
 
+### Running the Test Rust Game
+To run the test Rust game, you can use the following command:
+
+```bash
+cargo test -- --nocapture --test-threads=1
+```
+
 ## License
 
 [License](LICENSE.txt)
