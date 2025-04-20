@@ -38,4 +38,6 @@ int get_key(GLFWwindow* window, int key);
 // Function to get the window pointer
 GLFWwindow* get_window();
 
+void simulate_key_press(int key, int action);
+
 #endif // OPENGL_WRAPPER_LIB_H

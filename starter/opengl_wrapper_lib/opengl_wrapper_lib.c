@@ -1,9 +1,14 @@
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "opengl_wrapper_lib.h"
 
 // Global variable for the GLFW window
 GLFWwindow* window;
+
+// Global array to track key states
+#define MAX_KEYS 512
+int key_states[MAX_KEYS] = {0};
 
 // Function to create a game window
 void create_game_window(const char *title, int width, int height) {
@@ -82,10 +87,20 @@ int window_should_close() {
 
 // Function to get key state
 int get_key(GLFWwindow* window, int key) {
-    return glfwGetKey(window, key);
+    if (key >= 0 && key < MAX_KEYS) {
+        return key_states[key];
+    }
+    return GLFW_RELEASE;
 }
 
 // Function to get the window pointer
 GLFWwindow* get_window() {
     return window;
+}
+
+// Simulate a key press
+void simulate_key_press(int key, int action) {
+    if (key >= 0 && key < MAX_KEYS) {
+        key_states[key] = action;
+    }
 }

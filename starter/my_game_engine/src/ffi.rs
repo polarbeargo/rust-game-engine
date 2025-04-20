@@ -2,6 +2,7 @@ use std::ffi::CString;
 use std::os::raw::{c_char, c_int};
 
 extern "C" {
+    fn simulate_key_press(key: c_int, action: c_int);
     fn get_key(window: *mut std::ffi::c_void, key: c_int) -> c_int;
     fn create_game_window(
         title: *const c_char,
@@ -61,5 +62,11 @@ pub fn rust_clear_screen() {
 pub fn rust_update_sprite_position(sprite: *mut std::ffi::c_void, x: i32, y: i32) {
     unsafe {
         update_sprite_position(sprite, x, y);
+    }
+}
+
+pub fn rust_simulate_key_press(key: c_int, action: c_int) {
+    unsafe {
+        simulate_key_press(key, action);
     }
 }

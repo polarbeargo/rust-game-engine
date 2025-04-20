@@ -15,11 +15,10 @@ mod tests {
         let window = rust_create_window("Test Window", 800, 600);
         assert!(!window.is_null(), "Window creation failed");
 
+        rust_simulate_key_press(GLFW_KEY_SPACE, GLFW_PRESS);
+
         let key_state = rust_get_key(window, GLFW_KEY_SPACE);
-        assert_eq!(
-            key_state, false,
-            "Expected GLFW_KEY_SPACE to not be pressed"
-        );
+        assert_eq!(key_state, true, "Expected GLFW_KEY_SPACE to be pressed");
     }
 
     #[test]
