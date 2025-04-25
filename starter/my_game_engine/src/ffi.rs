@@ -15,6 +15,7 @@ extern "C" {
     fn render_sprite(sprite: *mut std::ffi::c_void);
     fn clear_screen();
     fn update_sprite_position(sprite: *mut std::ffi::c_void, x: i32, y: i32);
+    fn glfwTerminate();
 }
 
 pub const GLFW_PRESS: c_int = 1;
@@ -68,5 +69,11 @@ pub fn rust_update_sprite_position(sprite: *mut std::ffi::c_void, x: i32, y: i32
 pub fn rust_simulate_key_press(key: c_int, action: c_int) {
     unsafe {
         simulate_key_press(key, action);
+    }
+}
+
+pub fn rust_terminate_glfw() {
+    unsafe {
+        glfwTerminate();
     }
 }
