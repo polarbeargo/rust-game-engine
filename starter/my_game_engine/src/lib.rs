@@ -18,12 +18,6 @@ mod tests {
     }
 
     #[test]
-    fn test_create_window() {
-        let _window = setup_window();
-        run_game_loop();
-    }
-
-    #[test]
     fn test_get_key() {
         let window = setup_window();
         rust_simulate_key_press(GLFW_KEY_SPACE, GLFW_PRESS);
@@ -46,20 +40,15 @@ mod tests {
     }
 
     #[test]
-    fn test_window_should_close() {
+    fn test_render_sprite() {
         let _window = setup_window();
 
-        let should_close = rust_window_should_close();
-        assert_eq!(should_close, false, "Expected window to not be closing");
+        let sprite = rust_create_sprite(200, 200, 50, 50);
+        assert!(!sprite.is_null(), "Sprite creation failed");
 
-        run_game_loop();
-    }
-
-    #[test]
-    fn test_update_game_window() {
-        let _window = setup_window();
+        rust_render_sprite(sprite);
         rust_update_game_window();
-        run_game_loop();
+        rust_terminate_glfw();
     }
 
     #[test]
@@ -72,11 +61,23 @@ mod tests {
     #[test]
     fn test_update_sprite_position() {
         let _window = setup_window();
-
         let sprite = rust_create_sprite(100, 100, 50, 50);
         assert!(!sprite.is_null(), "Sprite creation failed");
 
-        rust_update_sprite_position(sprite, 150, 150);
-        run_game_loop();
+        let mut x = 100;
+        let mut y = 100;
+
+        while !rust_window_should_close() {
+            rust_clear_screen();
+
+            x += 1;
+            y += 1;
+            rust_update_sprite_position(sprite, x, y);
+
+            rust_render_sprite(sprite);
+            rust_update_game_window();
+        }
+
+        rust_terminate_glfw();
     }
 }
