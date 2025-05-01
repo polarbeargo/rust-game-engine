@@ -9,12 +9,20 @@ extern "C" {
         width: c_int,
         height: c_int,
     ) -> *mut std::ffi::c_void;
-    fn create_sprite(x: i32, y: i32, width: i32, height: i32) -> *mut std::ffi::c_void;
+    fn create_sprite(
+        x: f32,
+        y: f32,
+        width: i32,
+        height: i32,
+        r: i32,
+        g: i32,
+        b: i32,
+    ) -> *mut std::ffi::c_void;
     fn window_should_close() -> bool;
     fn update_game_window();
     fn render_sprite(sprite: *mut std::ffi::c_void);
     fn clear_screen();
-    fn update_sprite_position(sprite: *mut std::ffi::c_void, x: i32, y: i32);
+    fn update_sprite_position(sprite: *mut std::ffi::c_void, x: f32, y: f32);
     fn glfwTerminate();
 }
 
@@ -34,8 +42,16 @@ pub fn rust_create_window(title: &str, width: i32, height: i32) -> *mut std::ffi
     unsafe { create_game_window(c_title.as_ptr(), width, height) }
 }
 
-pub fn rust_create_sprite(x: i32, y: i32, width: i32, height: i32) -> *mut std::ffi::c_void {
-    unsafe { create_sprite(x, y, width, height) }
+pub fn rust_create_sprite(
+    x: f32,
+    y: f32,
+    width: i32,
+    height: i32,
+    r: i32,
+    g: i32,
+    b: i32,
+) -> *mut std::ffi::c_void {
+    unsafe { create_sprite(x, y, width, height, r, g, b) }
 }
 
 pub fn rust_window_should_close() -> bool {
@@ -60,7 +76,7 @@ pub fn rust_clear_screen() {
     }
 }
 
-pub fn rust_update_sprite_position(sprite: *mut std::ffi::c_void, x: i32, y: i32) {
+pub fn rust_update_sprite_position(sprite: *mut std::ffi::c_void, x: f32, y: f32) {
     unsafe {
         update_sprite_position(sprite, x, y);
     }
