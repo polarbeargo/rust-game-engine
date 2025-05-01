@@ -32,7 +32,7 @@ mod tests {
     fn test_create_sprite() {
         let _window = setup_window();
 
-        let sprite = rust_create_sprite(100, 100, 50, 50);
+        let sprite = rust_create_sprite(100.0, 100.0, 50, 50, 255, 0, 0);
         assert!(!sprite.is_null(), "Sprite creation failed");
 
         rust_render_sprite(sprite);
@@ -43,11 +43,12 @@ mod tests {
     fn test_render_sprite() {
         let _window = setup_window();
 
-        let sprite = rust_create_sprite(200, 200, 50, 50);
+        let sprite = rust_create_sprite(200.0, 200.0, 50, 50, 0, 255, 0);
         assert!(!sprite.is_null(), "Sprite creation failed");
 
         rust_render_sprite(sprite);
         rust_update_game_window();
+        run_game_loop();
         rust_terminate_glfw();
     }
 
@@ -61,17 +62,17 @@ mod tests {
     #[test]
     fn test_update_sprite_position() {
         let _window = setup_window();
-        let sprite = rust_create_sprite(100, 100, 50, 50);
+        let sprite = rust_create_sprite(100.0, 100.0, 50, 50, 255, 0, 0);
         assert!(!sprite.is_null(), "Sprite creation failed");
 
-        let mut x = 100;
-        let mut y = 100;
+        let mut x = 100.0;
+        let mut y = 100.0;
 
         while !rust_window_should_close() {
             rust_clear_screen();
 
-            x += 1;
-            y += 1;
+            x += 1.0;
+            y += 1.0;
             rust_update_sprite_position(sprite, x, y);
 
             rust_render_sprite(sprite);
