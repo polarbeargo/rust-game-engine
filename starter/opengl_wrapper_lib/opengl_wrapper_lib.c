@@ -87,10 +87,7 @@ int window_should_close() {
 
 // Function to get key state
 int get_key(GLFWwindow* window, int key) {
-    if (key >= 0 && key < MAX_KEYS) {
-        return key_states[key];
-    }
-    return GLFW_RELEASE;
+    return glfwGetKey(window, key);
 }
 
 // Function to get the window pointer
