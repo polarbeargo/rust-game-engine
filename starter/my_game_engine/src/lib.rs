@@ -32,6 +32,18 @@ mod tests {
     }
 
     #[test]
+    fn test_get_key() {
+        let _window = setup_window();
+        rust_simulate_key_press(GLFW_KEY_SPACE, GLFW_PRESS);
+        let window_ptr = rust_get_window_ptr();
+        let key_state = rust_get_key(window_ptr, GLFW_KEY_SPACE);
+        println!("Key state: {}", key_state);
+        assert_eq!(key_state, GLFW_PRESS, "Expected GLFW_PRESS to be pressed");
+
+        run_game_loop();
+    }
+
+    #[test]
     fn test_create_sprite() {
         let _window = setup_window();
 
@@ -43,7 +55,7 @@ mod tests {
     }
 
     #[test]
-    fn test_render_sprite() {
+    fn test_sprite_rendering() {
         let _window = setup_window();
 
         let sprite = rust_create_sprite(200.0, 200.0, 50, 50, 0, 255, 0);
@@ -56,7 +68,14 @@ mod tests {
     }
 
     #[test]
-    fn test_update_sprite_position() {
+    fn test_screen_clearing() {
+        let _window = setup_window();
+        rust_clear_screen();
+        run_game_loop();
+    }
+
+    #[test]
+    fn test_sprite_position_update() {
         let _window = setup_window();
         let sprite = rust_create_sprite(100.0, 100.0, 50, 50, 255, 0, 0);
         assert!(!sprite.is_null(), "Sprite creation failed");
@@ -91,6 +110,23 @@ mod tests {
         let _window = setup_window();
         tick!(100);
         std::thread::sleep(std::time::Duration::from_secs(1));
+        rust_clear_screen();
+    }
+
+    #[test]
+    fn test_on_key_press() {
+        let window = setup_window();
+
+        let mut key_pressed = false;
+        let window_ptr = rust_get_window_ptr();
+        rust_simulate_key_press(GLFW_KEY_SPACE, GLFW_PRESS);
+        on_key_press!(window_ptr, GLFW_KEY_SPACE, {
+            key_pressed = true;
+        });
+
+        std::thread::sleep(std::time::Duration::from_secs(2));
+        assert!(key_pressed, "Space key was not detected as pressed");
+        run_game_loop();
         rust_clear_screen();
     }
 
