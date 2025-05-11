@@ -87,6 +87,9 @@ int window_should_close() {
 
 // Function to get key state
 int get_key(GLFWwindow* window, int key) {
+    if (key >= 0 && key < MAX_KEYS && key_states[key] != 0) {
+        return key_states[key];
+    }
     return glfwGetKey(window, key);
 }
 
