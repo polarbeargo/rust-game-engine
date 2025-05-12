@@ -115,7 +115,7 @@ mod tests {
 
     #[test]
     fn test_on_key_press() {
-        let window = setup_window();
+        let _window = setup_window();
 
         let mut key_pressed = false;
         let window_ptr = rust_get_window_ptr();
@@ -132,9 +132,9 @@ mod tests {
 
     #[test]
     fn test_change_sprite_color() {
-        let window = setup_window();
+        let _window = setup_window();
 
-        let mut sprite = Sprite {
+        let sprite = Sprite {
             x: 100.0,
             y: 100.0,
             width: 50,
