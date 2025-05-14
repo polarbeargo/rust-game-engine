@@ -1,6 +1,8 @@
-mod ffi;
+pub mod ffi;
 #[macro_use]
-mod macros;
+pub mod macros;
+pub use crate::ffi::*;
+pub use crate::macros::*;
 
 pub struct Sprite {
     pub x: f32,
