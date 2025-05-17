@@ -12,7 +12,7 @@ impl SpriteController {
     }
 
     pub fn update(&self) {
-        while !rust_window_should_close() {
+        start_window_and_game_loop!("Backpack Game Window", 800, 600, {
             if let Ok(sprite_data) = self.rx.try_recv() {
                 println!("main thread: {:?}", sprite_data);
 
@@ -30,6 +30,6 @@ impl SpriteController {
                 rust_render_sprite(sprite);
                 rust_update_game_window();
             }
-        }
+        });
     }
 }

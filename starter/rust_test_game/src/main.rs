@@ -16,7 +16,6 @@ async fn main() -> Result<(), reqwest::Error> {
         model.fetch_sprite_data().await;
     });
 
-    let _window = rust_create_window("Backpack Game Window", 800, 600);
     controller.update();
 
     rust_terminate_glfw();

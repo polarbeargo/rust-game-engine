@@ -40,10 +40,10 @@ macro_rules! change_sprite_color {
 
 #[macro_export]
 macro_rules! start_window_and_game_loop {
-    ($title:expr, $width:expr, $height:expr) => {{
+    ($title:expr, $width:expr, $height:expr, $body:block) => {{
         rust_create_window($title, $width, $height);
         while !rust_window_should_close() {
-            tick!(16);
+            $body
         }
     }};
 }
