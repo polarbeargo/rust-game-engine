@@ -49,18 +49,36 @@ You should see the following pop-up window:
 
 ![readme_image_assets/img.png](readme_image_assets/img.png)
 
-### Starting the Rust Game Engine
+## Software Design Methodology
+1. We created a channel using `std::sync::mpsc` to facilitate communication between the main thread and the networking thread.
+2. Then we spawned a separate thread that continuously fetches sprite data from the specified URL. It sends the fetched data back to the main thread using the sender `(tx)`.
+3. In the main loop, the program checks for messages from the networking thread using `rx.try_recv()`. If a message is received, it updates the sprite's position accordingly.
+4. Finally added a sleep duration in the networking thread to simulate the delay of the HTTP request.
 
-With this done, we are ready to start creating our game engine project. Inside the `starter` folder, create a new Rust library project called `my_game_engine` (or whatever name you prefer), and then refer to the project instructions in the Udacity website to start building your game engine.
+## Software Design Architecture
+#### Model View Controller (MVC) Pattern:
+- [model.rs](starter/rust_test_game/src/model.rs) will handle the data and the logic related to fetching sprite data.
+- [main.rs](starter/rust_test_game/src/main.rs) will be much cleaner, focusing on initializing the model, controller, and starting the application.
+- [controller.rs](starter/rust_test_game/src/controller.rs) will manage the interaction between the model and the view (in this case, the game window).
 
-> Note: If you choose another name for your engine, you must update the references to `my_game_engine` in the `starter` folder's `Makefile` to reflect the new name.
-
-### Running the Test Rust Game
+#### Running the Test Rust Game
 To run the test Rust game, you can use the following command:
-
 ```bash
+cd ~/cd13678-intro-to-rust-starter/starter/my_game_engine
 cargo test -- --nocapture --test-threads=1
 ```
+#### Running the Backpack Game
+
+```
+cd ~/cd13678-intro-to-rust-starter/starter/rust_test_game  
+cargo run
+```  
+## Demo  
+
+- Oringinal demo:
+![](readme_image_assets/demo1.gif)  
+
+- Backpack game demo:
 
 ## License
 
