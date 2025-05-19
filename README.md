@@ -61,8 +61,8 @@ You should see the following pop-up window:
 - [main.rs](starter/rust_test_game/src/main.rs) will be much cleaner, focusing on initializing the model, controller, and starting the application.
 - [controller.rs](starter/rust_test_game/src/controller.rs) will manage the interaction between the model and the view (in this case, the game window).
 
-#### Running the Test Rust Game
-To run the test Rust game, you can use the following command:
+#### Running Tests
+To run tests, you can use the following command:
 ```bash
 cd ~/cd13678-intro-to-rust-starter/starter/my_game_engine
 cargo test -- --nocapture --test-threads=1
