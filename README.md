@@ -49,25 +49,41 @@ You should see the following pop-up window:
 
 ![readme_image_assets/img.png](readme_image_assets/img.png)
 
-## Software Design Methodology
+## My Game Engine Overview:
+
+- opengl_wrapper_lib:   
+
+    - [opengl_wrapper_lib.c](starter/opengl_wrapper_lib/opengl_wrapper_lib.c) contains the implementation of the OpenGL wrapper functions, encompassing functionalities for initializing OpenGL, creating windows, and rendering graphics seamlessly.
+    - [opengl_wrapper_lib.h](starter/opengl_wrapper_lib/opengl_wrapper_lib.h) contains the header definitions for the necessary data structures and function prototypes for the OpenGL wrapper library, providing a clear interface for users to interact with the library's capabilities.
+
+- my_game_engine:
+
+   - [build.rs](starter/my_game_engine/build.rs) is responsible for building the C code and linking it with the Rust code.
+   - [lib.rs](starter/my_game_engine/src/lib.rs) provides a simple API for creating a game window and rendering graphics using the `GLFW` library.
+   - [ffi.rs](starter/my_game_engine/src/ffi.rs) contains the `Foreign Function Interface (FFI)` code which defines the necessary bindings for the `GLFW` library and the C code.
+   - [macros.rs](starter/my_game_engine/src/macros.rs) contains the declarative macros used in the game engine. It defines macros for creating and managing game objects, handling events, and rendering graphics that further automates repetitive tasks.
+ 
+
+## Rust Test Game
+### Software Design Methodology
 1. We created a channel using `std::sync::mpsc` to facilitate communication between the main thread and the networking thread.
 2. Then we spawned a separate thread that continuously fetches sprite data from the specified URL. It sends the fetched data back to the main thread using the sender `(tx)`.
 3. In the main loop, the program checks for messages from the networking thread using `rx.try_recv()`. If a message is received, it updates the sprite's position accordingly.
 4. Finally added a sleep duration in the networking thread to simulate the delay of the HTTP request.
 
-## Software Design Architecture
-#### Model View Controller (MVC) Pattern:
-- [model.rs](starter/rust_test_game/src/model.rs) will handle the data and the logic related to fetching sprite data.
-- [main.rs](starter/rust_test_game/src/main.rs) will be much cleaner, focusing on initializing the model, controller, and starting the application.
-- [controller.rs](starter/rust_test_game/src/controller.rs) will manage the interaction between the model and the view (in this case, the game window).
+### Software Design Architecture
+- Model View Controller (MVC) Pattern:
+  - [model.rs](starter/rust_test_game/src/model.rs) will handle the data and the logic related to fetching sprite data.
+  - [main.rs](starter/rust_test_game/src/main.rs) will be much cleaner, focusing on initializing the model, controller, and starting the application.
+  - [controller.rs](starter/rust_test_game/src/controller.rs) will manage the interaction between the model and the view (in this case, the game window).
 
-#### Running Tests
+## Running Tests
 To run tests, you can use the following command:
 ```bash
 cd ~/cd13678-intro-to-rust-starter/starter/my_game_engine
 cargo test -- --nocapture --test-threads=1
 ```
-#### Running the Backpack Game
+## Running the Backpack Game
 
 ```
 cd ~/cd13678-intro-to-rust-starter/starter/rust_test_game  
@@ -75,10 +91,11 @@ cargo run
 ```  
 ## Demo  
 
-- Oringinal demo:
+- Rubric game demo:
 ![](readme_image_assets/demo1.gif)  
 
-- Backpack game demo:
+- Backpack game demo:  
+To be continued...
 
 ## License
 
