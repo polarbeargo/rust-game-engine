@@ -80,22 +80,20 @@ You should see the following pop-up window:
 ## Running Tests
 To run tests, you can use the following command:
 ```bash
-cd ~/cd13678-intro-to-rust-starter/starter/my_game_engine
-cargo test -- --nocapture --test-threads=1
+cd ~/cd13678-intro-to-rust-starter/starter
+make test-rust
 ```
-## Running the Backpack Game
+## Running the Rubric Game
 
 ```
-cd ~/cd13678-intro-to-rust-starter/starter/rust_test_game  
-cargo run
+cd ~/cd13678-intro-to-rust-starter/starter 
+make clean
+make run-rubric-game
 ```  
 ## Demo  
 
 - Rubric game demo:
 ![](readme_image_assets/demo1.gif)  
-
-- Backpack game demo:  
-To be continued...
 
 ## License
 
