@@ -34,7 +34,7 @@ mod tests {
     }
 
     #[test]
-    fn test_get_key() {
+    fn test_key_presses() {
         let _window = setup_window();
         rust_simulate_key_press(GLFW_KEY_SPACE, GLFW_PRESS);
         let window_ptr = rust_get_window_ptr();
@@ -150,5 +150,13 @@ mod tests {
         std::thread::sleep(std::time::Duration::from_secs(2));
         run_game_loop();
         rust_clear_screen();
+    }
+
+    #[test]
+    fn test_simple_game_loop() {
+        start_window_and_game_loop!("Simple Game", 800, 600, {
+            tick!(2);
+            break;
+        });
     }
 }
