@@ -1,6 +1,6 @@
 use crate::model::SpriteData;
 use my_game_engine::*;
-use std::sync::mpsc;
+use tokio::sync::mpsc;
 
 pub struct SpriteController {
     rx: mpsc::Receiver<SpriteData>,
@@ -11,9 +11,9 @@ impl SpriteController {
         Self { rx }
     }
 
-    pub fn update(&self) {
-        start_window_and_game_loop!("Backpack Game Window", 800, 600, {
-            if let Ok(sprite_data) = self.rx.try_recv() {
+    pub async fn update(&mut self) {
+        start_window_and_game_loop!("Rubric Game Window", 800, 600, {
+            while let Some(sprite_data) = self.rx.recv().await {
                 println!("main thread: {:?}", sprite_data);
 
                 let sprite = rust_create_sprite(

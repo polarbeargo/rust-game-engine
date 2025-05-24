@@ -1,8 +1,7 @@
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
-use std::sync::mpsc;
 use std::time::Duration;
-use tokio;
+use tokio::sync::mpsc;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct SpriteData {
@@ -41,7 +40,10 @@ impl SpriteModel {
                 .expect("Failed to parse JSON");
 
             println!("network thread: {:?}", response);
-            self.tx.send(response).expect("Failed to send sprite data");
+            self.tx
+                .send(response)
+                .await
+                .expect("Failed to send sprite data");
 
             tokio::time::sleep(Duration::from_secs(1)).await;
         }
