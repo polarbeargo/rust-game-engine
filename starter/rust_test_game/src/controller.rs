@@ -1,5 +1,6 @@
 use crate::model::SpriteData;
 use my_game_engine::*;
+use std::process;
 use tokio::sync::mpsc;
 
 pub struct SpriteController {
@@ -29,6 +30,9 @@ impl SpriteController {
                 rust_update_sprite_position(sprite, sprite_data.x as f32, sprite_data.y as f32);
                 rust_render_sprite(sprite);
                 rust_update_game_window();
+                on_key_press!(rust_get_window_ptr(), GLFW_KEY_ESCAPE, {
+                    process::exit(0);
+                });
             }
         });
     }

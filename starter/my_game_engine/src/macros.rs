@@ -28,11 +28,10 @@ macro_rules! tick {
 /// It uses the `rust_get_key` function to check the key state.
 /// This is useful for handling user input in the game loop.
 macro_rules! on_key_press {
-    ($window:expr, $key:expr, $action:block) => {{
-        if rust_get_key($window, $key) == GLFW_PRESS {
+    ($window:expr, $key:expr, $action:block) => {
+        if rust_get_key($window, $key) == GLFW_PRESS
             $action
-        }
-    }};
+    };
 }
 
 #[macro_export]
