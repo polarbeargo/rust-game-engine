@@ -66,9 +66,9 @@ You should see the following pop-up window:
 
 ## Rust Test Game
 ### Software Design Methodology
-1. We created a channel using `std::sync::mpsc` to facilitate communication between the main thread and the networking thread.
+1. We created a channel using `tokio::sync::mpsc` to facilitate communication between the main thread and the networking thread asynchronously.
 2. Then we spawned a separate thread that continuously fetches sprite data from the specified URL. It sends the fetched data back to the main thread using the sender `(tx)`.
-3. In the main loop, the program checks for messages from the networking thread using `rx.try_recv()`. If a message is received, it updates the sprite's position accordingly.
+3. In the main loop, the program checks for messages from the networking thread using `rx.recv().await` to await messages from the channel. If a message is received, it updates the sprite's position accordingly.
 4. Finally added a sleep duration in the networking thread to simulate the delay of the HTTP request.
 
 ### Software Design Architecture
